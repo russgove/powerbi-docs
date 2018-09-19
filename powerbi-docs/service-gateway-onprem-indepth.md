@@ -14,7 +14,7 @@ ms.author: mblythe
 LocalizationGroup: Gateways
 ---
 # On-premises data gateway in-depth
-It's possible for users in your organization to access on-premises data (to which they already have access authorization), but before those users can connect to your on-premises data source, an On-premises data gateway needs to be installed and configured. The gateway facilitates quick and secure behind-the-scenes communication between a user in the cloud, to your on-premises data source, and then back to the cloud.
+It's possible for users in your organization to access on-premises data, but before those users can connect to your on-premises data source, an On-premises data gateway needs to be installed and configured and a user with rights to access your on-premises data must establish a connection. The gateway facilitates quick and secure behind-the-scenes communication between a user in the cloud, to your on-premises data source, and then back to the cloud.
 
 Installing and configuring a gateway is usually done by an administrator. It may require special knowledge of your on-premises servers and in some cases may require Server Administrator permissions.
 
@@ -27,10 +27,10 @@ This article doesn’t provide step-by-step guidance on how to install and confi
 [!INCLUDE [gateway-onprem-datasources-include](./includes/gateway-onprem-datasources-include.md)]
 
 ## Sign in account
-Users will sign in with either a work or school account. This is your organization account. If you signed up for an Office 365 offering and didn’t supply your actual work email, it may look like nancy@contoso.onmicrosoft.com. Your account, within a cloud service, is stored within a tenant in Azure Active Directory (AAD). In most cases, your AAD account’s UPN will match the email address.
+When creating a connection, users will sign in with either a work or school account. This is your organization account. If you signed up for an Office 365 offering and didn’t supply your actual work email, it may look like nancy@contoso.onmicrosoft.com. Your account, within a cloud service, is stored within a tenant in Azure Active Directory (AAD). In most cases, your AAD account’s UPN will match the email address. When a connection is create the crededntial of the user creating the connection are stored and used when anyone accesses your  on-premises data using the connection.
 
 ## Authentication to on-premises data sources
-A stored credential will be used to connect to on-premises data sources from the gateway except Analysis Services. Regardless of the individual user, the gateway uses the stored credential to connect.
+The stored credentials will be used to connect to on-premises data sources from the gateway except Analysis Services. Regardless of the individual user, the gateway uses the stored credential to connect.
 
 ## Authentication to a live Analysis Services data source
 Each time a user interacts with Analysis Services, the effective username is passed to the gateway and then onto your on-premises Analysis Services server. The user principal name (UPN), typically the email address you sign into the cloud with, is what we will pass to Analysis Services as the effective user. The UPN is passed in the connection property EffectiveUserName. This email address should match a defined UPN within the local Active Directory domain. The UPN is a property of an Active Directory account. That Windows account then needs to be present in an Analysis Services role to have access to the server. The login will not be successful if no match is found in Active Directory.
